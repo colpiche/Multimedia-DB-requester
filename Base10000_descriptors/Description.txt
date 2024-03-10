@@ -1,0 +1,2 @@
+Tous les descripteurs sont des vecteurs de nombres réels en format texte.
+Chaque ligne contient le descripteur correspondant a une image, dans l'odre specifié dans le fichier Base10000_files.txt.
