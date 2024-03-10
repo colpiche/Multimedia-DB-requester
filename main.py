@@ -25,7 +25,7 @@ logging.basicConfig(
 index_db = db(DB_PATH)
 
 # Uncomment this line to index the database
-# index_db.index(nbins=16)
+# index_db.index()
 
 
 # Instructions to query the database

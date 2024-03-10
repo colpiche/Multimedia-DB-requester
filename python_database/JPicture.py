@@ -182,17 +182,18 @@ class JPicture:
 
         return image_luma
 
-    def histograms(self, image: Image.Image, nbins: int) -> tuple[np.ndarray, np.ndarray]:
+    def histograms(self, image: Image.Image) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         """
         Public method that computes the histograms of an image (luma and RGB).
 
         Args:
             image (Image.Image): The input image.
-            nbins (int): The number of bins for the histograms.
 
         Returns:
-            tuple[np.ndarray, np.ndarray]: The corresponding histograms, first luma then RGB.
+            tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+                The corresponding histograms: luma256, RGB 2x2x2, RGB 4x4x4, RGB 6x6x6.
         """
+            # nbins (int): The number of bins for the histograms.
 
         # Debugging information
         logging.debug(f'{inspect.currentframe().f_code.co_name}()')
@@ -203,14 +204,16 @@ class JPicture:
         # Normalize the pixel values of the image
         pixels: np.ndarray = self._normalize_image(image)
 
-        # Compute the RGB histogram
-        rgb_histo: np.ndarray = self._compute_histograms(pixels, nbins)
+        # Compute the RGB histograms
+        rgb_histo_2x2x2: np.ndarray = self._compute_histograms(pixels, 2)
+        rgb_histo_4x4x4: np.ndarray = self._compute_histograms(pixels, 4)
+        rgb_histo_6x6x6: np.ndarray = self._compute_histograms(pixels, 6)
 
         # Convert the image to grayscale
         grayscale_pixels: np.ndarray = self._rgb_to_luma(pixels)
 
         # Compute the luma histogram
-        gray_histo: np.ndarray = self._compute_histograms(grayscale_pixels, nbins)
+        gray_histo: np.ndarray = self._compute_histograms(grayscale_pixels, 256)
 
         # Return the histograms
-        return (gray_histo, rgb_histo)
+        return (gray_histo, rgb_histo_2x2x2, rgb_histo_4x4x4, rgb_histo_6x6x6)
