@@ -150,7 +150,7 @@ class QBE:
         # Define the file path for the generated HTML file
         file_path = os.path.join(
                 folder,
-                f'{''.join(image_name.split('.')[:-1])}_{descriptor_file_path.split('.')[-1]}_{nb_results}.html'
+                f'{"".join(image_name.split(".")[:-1])}_{descriptor_file_path.split(".")[-1]}_{nb_results}.html'
             )
 
         # Define the height of the images in the HTML file
@@ -171,7 +171,7 @@ class QBE:
 
             # Write the image results in the HTML file
             for i in range(nb_results):
-                file.write(f'<img src="../images/{distances[i]['file']}" height="{image_height}" />\n')
+                file.write(f'<img src="../images/{distances[i]["file"]}" height="{image_height}" />\n')
 
             # Write the HTML file footer
             file.write('</body>\n')
