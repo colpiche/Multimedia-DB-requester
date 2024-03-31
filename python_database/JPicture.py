@@ -54,52 +54,52 @@ class JPicture:
         # Return the computed histograms
         return bins
 
-def _compute_RGB_histogram(self, pixels: np.ndarray, nbins: int) -> np.ndarray:
-    """
-    Computes the RGB histogram of an image.
+    def _compute_RGB_histogram(self, pixels: np.ndarray, nbins: int) -> np.ndarray:
+        """
+        Computes the RGB histogram of an image.
 
-    Args:
-        pixels (np.ndarray): The pixel values of the image.
-        nbins (int): The number of bins for the histogram.
+        Args:
+            pixels (np.ndarray): The pixel values of the image.
+            nbins (int): The number of bins for the histogram.
 
-    Returns:
-        np.ndarray: The computed RGB histogram.
-    """
+        Returns:
+            np.ndarray: The computed RGB histogram.
+        """
 
-    # Debugging information
-    logging.debug(f'{inspect.currentframe().f_code.co_name}()')
+        # Debugging information
+        logging.debug(f'{inspect.currentframe().f_code.co_name}()')
 
-    # Calculate the dimensions of the bins array
-    bins_dimension: tuple = tuple(nbins for _ in range(pixels.shape[2]))
+        # Calculate the dimensions of the bins array
+        bins_dimension: tuple = tuple(nbins for _ in range(pixels.shape[2]))
 
-    # Initialize the bins array
-    bins: np.ndarray = np.zeros(bins_dimension, dtype=int)
+        # Initialize the bins array
+        bins: np.ndarray = np.zeros(bins_dimension, dtype=int)
 
-    # Calculate the step size for each bin
-    step: float = 1 / nbins
+        # Calculate the step size for each bin
+        step: float = 1 / nbins
 
-    # Iterate over each pixel in the image
-    for line in pixels:
-        for pixel in line:
-            # Calculate the bin index for each color channel
-            red_index: int = int(pixel[0] // step)
-            green_index: int = int(pixel[1] // step)
-            blue_index: int = int(pixel[2] // step)
+        # Iterate over each pixel in the image
+        for line in pixels:
+            for pixel in line:
+                # Calculate the bin index for each color channel
+                red_index: int = int(pixel[0] // step)
+                green_index: int = int(pixel[1] // step)
+                blue_index: int = int(pixel[2] // step)
 
-            # If the pixel value is the maximum possible value, put it in the last bin
-            if red_index == nbins:
-                red_index -= 1
+                # If the pixel value is the maximum possible value, put it in the last bin
+                if red_index == nbins:
+                    red_index -= 1
 
-            if green_index == nbins:
-                green_index -= 1
+                if green_index == nbins:
+                    green_index -= 1
 
-            if blue_index == nbins:
-                blue_index -= 1
+                if blue_index == nbins:
+                    blue_index -= 1
 
-            # Increment the corresponding bin
-            bins[red_index, green_index, blue_index] += 1
+                # Increment the corresponding bin
+                bins[red_index, green_index, blue_index] += 1
 
-    return bins
+        return bins
 
     def _compute_gray_level_histogram(self, pixels: np.ndarray, nbins: int) -> np.ndarray:
         """
