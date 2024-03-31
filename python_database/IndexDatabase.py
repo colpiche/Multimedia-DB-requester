@@ -11,7 +11,7 @@ class IndexDatabase:
     A class representing a database indexing utility.
 
     Attributes:
-        _db_path (str): The path to the database.
+        _db_path (str): The path to folder containing the images constituting the database.
         _db_files (list[str]): The list of files in the database.
         _histograms_type (list[str]): The list of histogram types.
         _jp (JPicture): An instance of the JPicture class.
